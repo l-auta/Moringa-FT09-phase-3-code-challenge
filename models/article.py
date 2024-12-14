@@ -7,4 +7,4 @@ class Article:
         self.magazine_id = magazine_id
 
     def __repr__(self):
-        return f'<Article {self.title}>'
+        return f"Article(id={self.id}, title={self.title}, content={self.content}, author_id={self.author_id}, magazine_id={self.magazine_id})"

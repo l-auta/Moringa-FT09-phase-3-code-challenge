@@ -19,29 +19,22 @@ def main():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-
-    '''
-        The following is just for testing purposes, 
-        you can modify it to meet the requirements of your implmentation.
-    '''
-
     # Create an author
     cursor.execute('INSERT INTO authors (name) VALUES (?)', (author_name,))
-    author_id = cursor.lastrowid # Use this to fetch the id of the newly created author
+    author_id = cursor.lastrowid  # Get the id of the newly created author
 
     # Create a magazine
-    cursor.execute('INSERT INTO magazines (name, category) VALUES (?,?)', (magazine_name, magazine_category))
-    magazine_id = cursor.lastrowid # Use this to fetch the id of the newly created magazine
+    cursor.execute('INSERT INTO magazines (name, category) VALUES (?, ?)', (magazine_name, magazine_category))
+    magazine_id = cursor.lastrowid  # Get the id of the newly created magazine
 
     # Create an article
     cursor.execute('INSERT INTO articles (title, content, author_id, magazine_id) VALUES (?, ?, ?, ?)',
                    (article_title, article_content, author_id, magazine_id))
+    article_id = cursor.lastrowid  # Get the id of the newly created article
 
-    conn.commit()
+    conn.commit()  # Commit the changes to the database
 
-    # Query the database for inserted records. 
-    # The following fetch functionality should probably be in their respective models
-
+    # Query the database for inserted records. This is just for demonstration.
     cursor.execute('SELECT * FROM magazines')
     magazines = cursor.fetchall()
 
@@ -56,15 +49,19 @@ def main():
     # Display results
     print("\nMagazines:")
     for magazine in magazines:
+        # You can manually map the data into Magazine objects if needed for further processing
         print(Magazine(magazine["id"], magazine["name"], magazine["category"]))
 
     print("\nAuthors:")
     for author in authors:
+        # You can manually map the data into Author objects if needed for further processing
         print(Author(author["id"], author["name"]))
 
     print("\nArticles:")
     for article in articles:
+        # You can manually map the data into Article objects if needed for further processing
         print(Article(article["id"], article["title"], article["content"], article["author_id"], article["magazine_id"]))
+
 
 if __name__ == "__main__":
     main()

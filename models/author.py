@@ -4,4 +4,4 @@ class Author:
         self.name = name
 
     def __repr__(self):
-        return f'<Author {self.name}>'
+        return f"Author(id={self.id}, name={self.name})"
